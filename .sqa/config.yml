@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ulbricht/mds:
+      branch: igsn
+      repo: https://github.com/ulbricht/mds
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ulbricht/mds git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-sangria-meerkat.sh
+        container: qc.acc_cheeky-teal-dragon
+  QC.Doc:
+    repos:
+      github.com/ulbricht/mds find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-saffron-armadillo.sh
+        container: qc.doc_crappy-champagne-worm
+      github.com/ulbricht/mds git:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-silver-burmese.sh
+        container: qc.doc_droopy-charcoal-lynx
+      github.com/ulbricht/mds markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-wheat-bison.sh
+        container: qc.doc_pokey-alizarin-hamster
+  QC.Lic:
+    repos:
+      github.com/ulbricht/mds licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-magenta-cougar.sh
+        container: qc.lic_sloppy-russet-kiwi
+  QC.Sec:
+    repos:
+      github.com/ulbricht/mds bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-blue-tzu.sh
+        container: qc.sec_foggy-heliotrope-angelfish
+  QC.Sty:
+    repos:
+      github.com/ulbricht/mds checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-champagne-beagle.sh
+        container: qc.sty_gamy-indigo-coyote
+      github.com/ulbricht/mds flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-olive-coral.sh
+        container: qc.sty_hasty-cream-tiger
+  QC.Ver:
+    repos:
+      github.com/ulbricht/mds get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-teal-lion.sh
+        container: qc.ver_hasty-plum-mau
+timeout: 5400
